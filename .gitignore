@@ -1,0 +1,22 @@
+# Machine-specific overrides; local.example.lua is intentionally tracked.
+/local.lua
+
+# Editor and OS temporary files.
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Keep plugins, native libraries and generated files outside this repo.
+/.repro/
+/lazy/
+/node_modules/
+*.exe
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+
+# Track lazy-lock.json to preserve plugin versions across machines.
