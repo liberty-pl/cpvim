@@ -1,4 +1,4 @@
-# Neovim 算法竞赛配置
+# cpvim
 
 基于 LazyVim，包含 Kanagawa 主题、中文快捷键提示、clangd、C/C++ 格式化、
 CompetiTest 样例评测、比赛工作目录和 CodeSnap 代码截图。
@@ -11,19 +11,19 @@ CompetiTest 样例评测、比赛工作目录和 CodeSnap 代码截图。
 将对应平台的命令复制到本地终端执行即可，无需手动克隆仓库。
 默认只安装配置，会备份原配置并保留 `local.lua`。
 
-安装命令使用公开仓库 `liberty-pl/nvim-config`。
+安装命令使用公开仓库 [`liberty-pl/cpvim`](https://github.com/liberty-pl/cpvim)。
 如果采用其他仓库名，请同步修改命令中的地址。
 
 Linux / macOS / WSL：
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/liberty-pl/nvim-config/main/install.sh | bash -s -- --repo https://github.com/liberty-pl/nvim-config.git
+curl -fsSL https://raw.githubusercontent.com/liberty-pl/cpvim/main/install.sh | bash -s -- --repo https://github.com/liberty-pl/cpvim.git
 ```
 
 原生 Windows（PowerShell）：
 
 ```powershell
-& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/liberty-pl/nvim-config/main/install.ps1'))) -Repo 'https://github.com/liberty-pl/nvim-config.git'
+& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/liberty-pl/cpvim/main/install.ps1'))) -Repo 'https://github.com/liberty-pl/cpvim.git'
 ```
 
 想同时安装基础系统依赖，在 Linux/macOS 命令末尾加 `--install-deps`，
@@ -114,20 +114,19 @@ tree-sitter CLI 在这些发行版上需另行安装。字体和终端字体设�
 
 如果希望手动安装，也可以使用以下步骤。
 
-将下面的 `YOUR_USER` 和 `YOUR_REPO` 换成自己的 GitHub 用户名和仓库名。
 如果目标目录已有配置，先重命名备份；不要直接覆盖。这里只克隆配置，不搬运插件二进制。
 
 Linux / macOS / WSL（默认配置路径）：
 
 ```sh
-git clone https://github.com/YOUR_USER/YOUR_REPO.git ~/.config/nvim
+git clone https://github.com/liberty-pl/cpvim.git ~/.config/nvim
 nvim
 ```
 
 原生 Windows（PowerShell，默认配置路径）：
 
 ```powershell
-git clone https://github.com/YOUR_USER/YOUR_REPO.git "$env:LOCALAPPDATA\nvim"
+git clone https://github.com/liberty-pl/cpvim.git "$env:LOCALAPPDATA\nvim"
 nvim
 ```
 
@@ -186,10 +185,10 @@ git add .
 git diff --cached --stat
 git diff --cached
 git commit -m "Add portable Neovim configuration"
-gh repo create nvim-config --public --source=. --remote=origin --push
+gh repo create cpvim --public --source=. --remote=origin --push
 ```
 
-这里创建名为 `nvim-config` 的公开仓库，使顶部的一行安装命令可以直接下载。
+这里创建名为 `cpvim` 的公开仓库，使顶部的一行安装命令可以直接下载。
 若希望使用私有仓库，将 `--public` 改成 `--private`，并使用通过 Git 登录后克隆安装的方式；
 顶部的匿名下载命令不适用于私有仓库。若该仓库名已经存在，换一个名称并更新安装命令中的地址。
 这套命令适用于尚未初始化 Git、尚无远端的配置目录。
