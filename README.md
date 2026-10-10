@@ -50,10 +50,16 @@ Windows 命令末尾加 `-InstallDeps`。默认不安装系统依赖；Windows �
 
 Linux：通过发行版包管理器安装上面的工具，并确保 `gcc`、`g++` 在 PATH 中。
 
-macOS：安装 Homebrew 的 GNU GCC。系统自带的 `g++` 通常是 Apple Clang，
-不提供此模板需要的 `bits/stdc++.h`。配置会优先从 PATH 中选择版本号最高的
-`gcc-N` / `g++-N`；Homebrew 的 bin 目录必须在启动 Neovim 的 PATH 中。
-也可以通过 `local.lua` 指定完整路径。
+macOS：使用 GNU GCC 15，C 编译器为 `gcc-15`，C++ 编译器为 `g++-15`。
+通过 Homebrew 安装：
+
+```sh
+brew install gcc@15
+```
+
+Homebrew 的 bin 目录必须在启动 Neovim 的 PATH 中，也可以通过 `local.lua` 指定完整路径。
+配置默认固定使用版本 15；系统自带的 `g++` 通常是 Apple Clang，
+不提供此模板需要的 `bits/stdc++.h`。安装脚本的 `--install-deps` 也会安装 `gcc@15`。
 
 原生 Windows：安装 MSYS2，使用 **UCRT64** 工具链；在 UCRT64 终端中安装 GCC：
 
@@ -68,7 +74,7 @@ MSVC 不适用于当前 GNU 编译参数和竞赛模板。
 
 相关官方说明：[LazyVim 依赖](https://www.lazyvim.org/)、
 [MSYS2 环境](https://www.msys2.org/docs/environments/)、
-[Homebrew GCC](https://formulae.brew.sh/formula/gcc)、
+[Homebrew GCC 15](https://formulae.brew.sh/formula/gcc@15)、
 [Neovim 安装](https://neovim.io/doc/install/)。
 
 ## 在另一台电脑安装
@@ -164,7 +170,8 @@ CompileFlags:
   Compiler: 'C:/msys64/ucrt64/bin/g++.exe'
 ```
 
-macOS 示例可改成 `/opt/homebrew/bin/g++-N`，其中 `N` 换成已安装版本号。
+macOS 使用 `g++-15`，Apple Silicon 默认路径可写成 `/opt/homebrew/bin/g++-15`，
+Intel 默认路径可写成 `/usr/local/bin/g++-15`；以 `command -v g++-15` 的输出为准。
 这份 `.clangd` 属于本机工作目录设置，不需要放进 Neovim 配置仓库。
 参见 [clangd 系统头文件说明](https://clangd.llvm.org/guides/system-headers)。
 

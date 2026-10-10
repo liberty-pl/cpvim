@@ -55,7 +55,7 @@ as_root() {
 if [ "$install_deps" -eq 1 ]; then
   if [ "$os" = Darwin ]; then
     command -v brew >/dev/null 2>&1 || die "Install Homebrew first: https://brew.sh"
-    brew install neovim git gcc curl ripgrep fd tree-sitter
+    brew install neovim git gcc@15 curl ripgrep fd tree-sitter
   elif command -v pacman >/dev/null 2>&1; then
     as_root pacman -S --needed neovim git gcc curl ripgrep fd tree-sitter-cli wl-clipboard xclip
   elif command -v apt-get >/dev/null 2>&1; then
@@ -146,7 +146,9 @@ else
   note "Installed configuration: $target"
 fi
 
-for tool in nvim git curl rg tree-sitter gcc g++; do
+compiler_tools=(gcc g++)
+if [ "$os" = Darwin ]; then compiler_tools=(gcc-15 g++-15); fi
+for tool in nvim git curl rg tree-sitter "${compiler_tools[@]}"; do
   if ! command -v "$tool" >/dev/null 2>&1; then
     note "Missing dependency: $tool (see README.md)"
   fi
@@ -165,7 +167,7 @@ if command -v nvim >/dev/null 2>&1; then
   fi
 fi
 if [ "$os" = Darwin ]; then
-  note "macOS: GNU GCC must be on PATH; Apple Clang cannot compile this contest template."
+  note "macOS: gcc-15 and g++-15 must be on PATH (brew install gcc@15)."
 fi
 note "Next: launch nvim, run :Lazy restore, restart, then run :checkhealth."
 note "For a custom --target, configure XDG_CONFIG_HOME/NVIM_APPNAME to use that directory."

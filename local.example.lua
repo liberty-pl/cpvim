@@ -2,6 +2,11 @@
 -- local.lua is ignored by Git. Compiler values must be a single executable,
 -- not a shell command with flags. Use forward slashes for Windows paths.
 
+-- macOS defaults already use GCC 15; these overrides are optional.
+-- vim.g.cp_cc = "gcc-15"
+-- vim.g.cp_cxx = "g++-15"
+
+-- Windows overrides:
 -- vim.g.cp_cc = "C:/msys64/ucrt64/bin/gcc.exe"
 -- vim.g.cp_cxx = "C:/msys64/ucrt64/bin/g++.exe"
 -- vim.g.cp_workspace_root = "D:/XCPC"

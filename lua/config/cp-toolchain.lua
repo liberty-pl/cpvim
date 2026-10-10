@@ -8,21 +8,9 @@ function M.compiler(language)
     return path ~= "" and path or override
   end
 
-  -- On macOS, unversioned gcc/g++ usually invoke Apple Clang. Prefer the
-  -- versioned GNU compiler so the contest template can use bits/stdc++.h.
+  -- On macOS, use GNU GCC 15 rather than the unversioned Apple Clang aliases.
   if vim.fn.has("macunix") == 1 then
-    local newest_version, newest_path = 0, nil
-    for _, directory in ipairs(vim.split(vim.env.PATH or "", ":", { trimempty = true })) do
-      for _, path in ipairs(vim.fn.glob(vim.fs.joinpath(directory, name .. "-[0-9]*"), false, true)) do
-        local version = tonumber(vim.fn.fnamemodify(path, ":t"):match("%-(%d+)$"))
-        if version and version > newest_version and vim.fn.executable(path) == 1 then
-          newest_version, newest_path = version, path
-        end
-      end
-    end
-    if newest_path then
-      return newest_path
-    end
+    name = name .. "-15"
   end
 
   local path = vim.fn.exepath(name)
